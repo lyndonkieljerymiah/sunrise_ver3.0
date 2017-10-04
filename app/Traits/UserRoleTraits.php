@@ -61,6 +61,11 @@ trait UserRoleTraits
 
     public function removeRole($roleId) {
         
+        $role = $this->role()->find($roleId);
+        if($role) {
+            $role->delete();
+        }
+        
     }
 
 
