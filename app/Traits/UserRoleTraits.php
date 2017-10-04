@@ -48,6 +48,10 @@ trait UserRoleTraits
         return false;
     }
 
+    public function addNewRole() {
+        
+    }
+
 
 
     public function isPasswordMatch($attempt)
