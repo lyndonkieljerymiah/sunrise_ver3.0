@@ -48,8 +48,15 @@ trait UserRoleTraits
         return false;
     }
 
-    public function addNewRole() {
-        
+    public function addNewRole($roles) {
+        if(is_array($roles)) {
+            foreach($roles as $role) {
+                $this->roles()->attach($role);
+            }
+        }
+        else {
+            $this->roles()->attach($roles);
+        }
     }
 
 
