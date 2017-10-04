@@ -59,6 +59,10 @@ trait UserRoleTraits
         }
     }
 
+    public function removeRole($roleId) {
+        
+    }
+
 
 
     public function isPasswordMatch($attempt)
