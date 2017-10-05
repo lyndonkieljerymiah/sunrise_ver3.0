@@ -28,10 +28,10 @@ trait ApiRegisterTraits
         ]);
 
         $user = $this->store($request->all());
-            
         event(new Registered($user));
-        
+
         return response()->json(["isOk" => true,"message" => "Successfully Registered",$user]);
+        
     }
 
     public function update($id,Request $request) {
