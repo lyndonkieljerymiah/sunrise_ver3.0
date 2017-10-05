@@ -11,9 +11,9 @@ namespace App\Traits;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use App\Facades\Result;
+use Mockery\Exception;
 
 trait ApiRegisterTraits
 {
@@ -27,11 +27,44 @@ trait ApiRegisterTraits
             "password"      =>  'required|confirmed'
         ]);
 
-        $user = $this->create($request->all());
-        
+        $user = $this->store($request->all());
+            
         event(new Registered($user));
         
         return response()->json(["isOk" => true,"message" => "Successfully Registered",$user]);
+    }
+
+    public function update($id,Request $request) {
+
+
+        $request->request->add(['id' => $id]);
+
+        $this->validate($request, [
+            "id"            =>  'required|integer',
+            "full_name"     =>  'required',
+            "user_name"     =>  'required|max:20',
+            "email"         =>  'required|email',
+        ]);
+
+        $user = $this->store($request->all());
+
+        event(new Registered($user));
+        
+        return response()->json(["isOk" => true,"message" => "Successfully Registered",$user]);
+
+    }
+
+    public function edit($id) {
+        try {
+            $user = $this->user->with('roles')->where('id',$id)->get();
+            if($user->count() <= 0) {
+                throw new Exception("Unknown User");
+            }
+            return $user;
+        }
+        catch(Exception $e) {
+            return Result::badRequest(["message" => $e->getMessage()]);
+        }
     }
 
     
