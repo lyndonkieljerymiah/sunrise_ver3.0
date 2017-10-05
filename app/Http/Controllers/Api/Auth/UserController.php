@@ -18,7 +18,6 @@ class UserController extends Controller
 
     public function __construct()
     {
-
         $this->user = new User();
     }
 
@@ -34,7 +33,6 @@ class UserController extends Controller
             } else {
                 $user = $this->user->register($data);
             }
-
 
             return $user;
         }

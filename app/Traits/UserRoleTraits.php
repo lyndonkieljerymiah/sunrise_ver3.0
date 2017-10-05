@@ -62,13 +62,7 @@ trait UserRoleTraits
                 $this->roles()->attach($roles);
             }
         }
-
     }
-
-    public function updateRole($roles) {
-
-    }
-
 
 
     public function isPasswordMatch($attempt)

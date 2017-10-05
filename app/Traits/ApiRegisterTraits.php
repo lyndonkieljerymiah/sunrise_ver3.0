@@ -65,8 +65,6 @@ trait ApiRegisterTraits
         catch(Exception $e) {
             return Result::badRequest(["message" => $e->getMessage()]);
         }
-
-        
     }
 
     

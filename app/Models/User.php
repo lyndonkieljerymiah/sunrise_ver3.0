@@ -48,7 +48,6 @@ class User extends Authenticatable
         if(isset($entity['password'])) {
             $this->password = bcrypt($entity['password']);
         }
-        
 
         $this->save();
 
