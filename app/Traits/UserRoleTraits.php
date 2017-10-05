@@ -49,23 +49,24 @@ trait UserRoleTraits
     }
 
     public function addNewRole($roles) {
-        if(is_array($roles)) {
-            foreach($roles as $role) {
-                $this->roles()->attach($role);
-            }
+        if($this->roles()->count() > 0) {
+            $this->roles()->sync($roles);
         }
         else {
-            $this->roles()->attach($roles);
+            if(is_array($roles)) {
+                foreach($roles as $role) {
+                    $this->roles()->attach($role);
+                }
+            }
+            else {
+                $this->roles()->attach($roles);
+            }
         }
+
     }
 
-    public function removeRole($roleId) {
-        
-        $role = $this->role()->find($roleId);
-        if($role) {
-            $role->delete();
-        }
-        
+    public function updateRole($roles) {
+
     }
 
 

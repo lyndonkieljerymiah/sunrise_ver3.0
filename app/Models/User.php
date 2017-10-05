@@ -45,18 +45,25 @@ class User extends Authenticatable
         $this->full_name = $entity['full_name'];
         $this->user_name = $entity['user_name'];
         $this->email = $entity['email'];
-        $this->password = bcrypt($entity['password']);
+        if(isset($entity['password'])) {
+            $this->password = bcrypt($entity['password']);
+        }
+        
 
         $this->save();
 
         if(isset($entity['roles'])) {
-            $roles = $entity['roles'];
-            foreach($roles as $role) {
-                $this->roles()->attach((int)$role);
-            }
+            $rolesToArray = explode(",",$entity["roles"]);
+            $this->addNewRole($rolesToArray);
         }
 
         return $this;
     }
+
+    public function passwordChange() {
+        
+    }
+
+
 
 }
