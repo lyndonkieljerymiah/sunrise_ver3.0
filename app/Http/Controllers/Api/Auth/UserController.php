@@ -21,16 +21,26 @@ class UserController extends Controller
         $this->user = new User();
     }
 
+    public function index() {
+
+        return $this->user->users_with_roles;
+
+    }
+
     protected function store($data)
     {
         try {
+
             if (isset($data['id']) && $data['id'] != 0) {
                 $user = $this->user->find($data['id']);
-                if (!$user) 
+
+                if (!$user)
                     throw new Exception("Unknown User");
+
                 $user->register($data);
 
-            } else {
+            }
+            else {
                 $user = $this->user->register($data);
             }
 
