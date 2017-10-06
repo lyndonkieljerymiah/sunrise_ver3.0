@@ -23,7 +23,8 @@ class UserController extends Controller
 
     public function index() {
 
-        return $this->user->users_with_roles;
+        $user_role = $this->user->users_with_roles;
+        
 
     }
 
